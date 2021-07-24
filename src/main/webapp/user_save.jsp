@@ -12,7 +12,7 @@
     String email = request.getParameter("EM");
     String ID = request.getParameter("ID");
     String name = request.getParameter("UN");
-    int age = 2021 - Integer.parseInt(request.getParameter("age")) + 1;
+    String birth = request.getParameter("birth");
 
     Connection conn =null;
     PreparedStatement pstmt = null;
@@ -26,12 +26,13 @@
 
     String sql =
             "insert into user (user_name, email, birthday, user_id)\n" +
-            "values (?, ?, now(), ?)";
+            "values (?, ?, ?, ?)";
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, name);
     pstmt.setString(2, email);
-    pstmt.setString(3, ID);
+    pstmt.setString(3, birth);
+    pstmt.setString(4, ID);
 
     pstmt.executeUpdate();
 
@@ -42,7 +43,7 @@
 
 
 
-    System.out.println(age);
+    System.out.println(birth);
     System.out.println(email);
     System.out.println(ID);
     System.out.println(name);
@@ -50,7 +51,7 @@
     out.println(email);
     out.println(ID);
     out.println(name);
-    out.println(age);
+    out.println(birth);
 
 %>
 <script>

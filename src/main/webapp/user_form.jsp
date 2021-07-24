@@ -21,7 +21,7 @@
   <p> 폼을 통해 데이터를 전송해봅시다. </p>
  </div>
 
-<form action="user_result.jsp" method="post">
+<form action="user_save.jsp" method="post">
     <div>
         <label> 이메일 </label>
         <input name ="EM" type = "email" />
@@ -35,8 +35,8 @@
         <input name = "UN" type = "name" />
     </div>
     <div>
-        <label> 나이 </label>
-        <input name = "age" type = "age" />
+        <label> 생일 </label>
+        <input name = "birth" type = "date" />
     </div>
     <button type = "summit"> 전송 </button>
 </form>

@@ -49,10 +49,9 @@
 <div class="container" id="container">
     <div class="header"> <h2> 이채훈의 할일 목록 </h2> </div>
     <div class="body">
-        <form id = "input_form" action = TodoList_result.jsp method = post>
+        <form id = "input_form" action = todo_save.jsp method = post>
             <span>날짜입력</span>
-            <input type="date" placeholder="날짜를 입력하세요" name = "a">
-            <button> 추가 </button> <br> <br>
+            <input type="date" placeholder="날짜를 입력하세요" name = "input_date"> <br> <br>
             <label> 2021년 4월 21일 </label>
             <ul>
                 <li>할 일 목록 1</li>
@@ -61,17 +60,17 @@
             </ul> <br>
             <div class = "box">
                 <label> 할일 목록 </label> <br> <br>
-                <input type="text" placeholder="할일을 입력하세요" name = "job"> <br> <br>
-                <label> 시작일 </label> <input type="date" name = "c">
+                <input type="text" placeholder="할일을 입력하세요" name = "work_list"> <br> <br>
+                <label> 시작일 </label> <input type="date" name = "start_date">
                 <input id = "appt-time" type = "time" name = "start-time" step = "2"> <br> <br>
-                <label> 마감일 </label> <input type="date" name = "d">
+                <label> 마감일 </label> <input type="date" name = "finish_date">
                 <input id = "appt-time" type = "time" name = "finish-time" step = "2"> <br> <br>
-                <label> 알림 설정 </label> <br>
+                <label> 알림 설정 </label> <br> </div>
                 <div class = "box">
-                    <lable> <input type = "radio" name = "msg_sns" value = "mes1"> 메세지 </lable>
+                    <lable> <input type = "radio" name = "msg_sns" value = "mes1" checked> 메세지 </lable>
                     <lable> <input type = "radio" name = "msg_sns" value = "SMS1"> SMS </lable>
                 </div> <br>
-                <lable> <input type = "checkbox" name = "zz" value = "Y"> 진동 </lable> <br> <br>
+                <lable> <input type = "checkbox" name = "bibration" value = "Y"> 진동 </lable> <br> <br>
                 <button type ="summit"> 저장하기 </button>
                 <button> 취소하기 </button>
         </form>

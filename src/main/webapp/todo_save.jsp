@@ -10,22 +10,25 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%
-    String dateinput = request.getParameter("a");
-    String worklist = request.getParameter("job");
+    String input_date = request.getParameter("input_date");
+    String work_list = request.getParameter("work_list");
     String sT = request.getParameter("start-time");
-    String start = request.getParameter("c");
+    String start_date = request.getParameter("start_date");
     String fT = request.getParameter("finish-time");
-    String finish = request.getParameter("d");
-    String bibration = request.getParameter("zz");
+    String finish_date = request.getParameter("finish_date");
+    String bibration = request.getParameter("bibration");
     String msg_sns = request.getParameter("msg_sns");
 
-    String startTime = start.concat(" ").concat(sT);
+    if(bibration == null) bibration ="N";
+
+
+    String startTime = start_date.concat(" ").concat(sT);
     System.out.println(startTime);
     DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     LocalDateTime startTimeResult = LocalDateTime.parse(startTime, formatter2);
     System.out.println(startTimeResult);
 
-    String finishTime = finish.concat(" ").concat(fT);
+    String finishTime = finish_date.concat(" ").concat(fT);
     System.out.println(finishTime);
     LocalDateTime finishTimeResult = LocalDateTime.parse(finishTime, formatter2);
     System.out.println(finishTimeResult);
@@ -46,7 +49,7 @@
                     "values (now(), ?, ?, ?, ?, ?)";
 
     pstmt = conn.prepareStatement(sql);
-    pstmt.setString(1, worklist);
+    pstmt.setString(1, work_list);
     pstmt.setTimestamp(2, Timestamp.valueOf(startTimeResult));
     pstmt.setTimestamp(3, Timestamp.valueOf(finishTimeResult));
     pstmt.setString(4, msg_sns);
@@ -57,27 +60,8 @@
     pstmt.close();
     conn.close();
 
-
-    System.out.println(dateinput);
-    System.out.println(worklist);
-    System.out.println(start);
-    System.out.println(finish);
-    System.out.println(bibration);
-    System.out.println(msg_sns);
-    System.out.println(sT);
-    System.out.println(fT);
-
-
-    out.println(dateinput);
-    out.println(worklist);
-    out.println(start);
-    out.println(finish);
-    out.println(bibration);
-    out.println(msg_sns);
-    out.println(sT);
-    out.println(fT);
 %>
 <script>
     alert("저장 성공!");
-    location.href = 'todolist_form.jsp';
+    location.href = 'todo_form.jsp';
 </script>

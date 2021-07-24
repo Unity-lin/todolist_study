@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: ichaehun
-  Date: 2021/07/10
-  Time: 10:50 오전
+  Date: 2021/07/13
+  Time: 6:05 오후
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
 <table>
-<%
+  <%
     Connection conn =null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -22,35 +22,31 @@
     Class.forName("com.mysql.jdbc.Driver");
     conn = DriverManager.getConnection(url, id, pwd);
 
-    String sql = "SELECT * FROM todo";
+    String sql = "SELECT * FROM user";
     pstmt = conn.prepareStatement(sql);
 
     rs = pstmt.executeQuery();
 
     while (rs.next()) {
-        String title = rs.getString("reception_way");
-        int seq = rs.getInt("seq");
-        String name = rs.getString("work_name");
-        String on = rs.getString("isbibration");
-        LocalDateTime search = rs.getTimestamp("input_date").toLocalDateTime();
-        LocalDateTime startday = rs.getTimestamp("start_date").toLocalDateTime();
-        LocalDateTime finishday = rs.getTimestamp("finish_date").toLocalDateTime();
-%>
-<tr>
-    <td><a href="./todolist_view.jsp?code=<%=seq%>"><%=seq %></a></td>
-    <td><%=search%></td>
-    <td><%=name%></td>
-    <td><%=startday%></td>
-    <td><%=finishday%></td>
-    <td><%=title%></td>
-    <td><%=on%></td>
-</tr>
-<%
+      String uname = rs.getString("user_name");
+      String email = rs.getString("email");
+      String uid = rs.getString("user_id");
+      int seq = rs.getInt("user_seq");
+      LocalDateTime birth = rs.getTimestamp("birthday").toLocalDateTime();
+  %>
+  <tr>
+    <td> <a href="./user_view.jsp?code=<%=seq%>"><%=seq %></a> </td>
+    <td> <%=uname%> </td>
+    <td> <%=email%> </td>
+    <td> <%=uid%> </td>
+    <td> <%=birth%> </td>
+  </tr>
+  <%
     }
-%>
+  %>
 </table>
 <%
-    rs.close();
-    pstmt.close();
-    conn.close();
+  rs.close();
+  pstmt.close();
+  conn.close();
 %>
