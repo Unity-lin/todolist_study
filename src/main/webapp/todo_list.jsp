@@ -10,7 +10,14 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
 <table>
+    <%
+       if(session.getAttribute("user_seq") == null){
+
+          response.sendRedirect("login_form.jsp");
+       }
+    %>
 <%
+
     Connection conn =null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -22,7 +29,9 @@
     Class.forName("com.mysql.jdbc.Driver");
     conn = DriverManager.getConnection(url, id, pwd);
 
-    String sql = "SELECT * FROM todo";
+    int user_seq = (Integer) session.getAttribute("user_seq");
+
+    String sql = "SELECT * FROM todo where user_seq = 1" ;
     pstmt = conn.prepareStatement(sql);
 
     rs = pstmt.executeQuery();
@@ -49,6 +58,7 @@
     }
 %>
 </table>
+<a href = "todo_form.jsp"> form으로 돌아가기 </a>
 <%
     rs.close();
     pstmt.close();

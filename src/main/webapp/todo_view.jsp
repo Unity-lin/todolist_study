@@ -10,6 +10,12 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
 <!DOCTYPE html>
+<%
+    if(session.getAttribute("user_seq") == null){
+
+        response.sendRedirect("login_form.jsp");
+    }
+%>
     <%
         Connection conn =null;
         PreparedStatement pstmt = null;

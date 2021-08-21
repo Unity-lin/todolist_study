@@ -10,6 +10,12 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%
+    if(session.getAttribute("user_seq") == null){
+
+        response.sendRedirect("login_form.jsp");
+    }
+%>
+<%
     String input_date = request.getParameter("input_date");
     String work_list = request.getParameter("work_list");
     String start_date = request.getParameter("start_date");
@@ -37,8 +43,9 @@
     Class.forName("com.mysql.jdbc.Driver");
     conn = DriverManager.getConnection(url, id, pwd);
 
-    String sql = "UPDATE todo SET input_date = ?, work_name = ?, start_date = ?, finish_date = ?,  reception_way = ?, isbibration = ? WHERE seq = ?";
+    String sql = "UPDATE todo SET input_date = ?, work_name = ?, start_date = ?, finish_date = ?,  reception_way = ?, isbibration = ? WHERE seq = ? and user_seq = ?";
 
+    int user_seq = (Integer) session.getAttribute("user_seq");
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, input_date);
@@ -48,6 +55,7 @@
     pstmt.setString(5, msg_sns);
     pstmt.setString(6, bibration);
     pstmt.setString(7, seq);
+    pstmt.setInt(8, user_seq);
 
     int rowCount = pstmt.executeUpdate();
 

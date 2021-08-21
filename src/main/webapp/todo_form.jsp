@@ -6,6 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if(session.getAttribute("user_seq") == null){
+
+        response.sendRedirect("login_form.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +53,7 @@
 </head>
 <body>
 <div class="container" id="container">
-    <div class="header"> <h2> 이채훈의 할일 목록 </h2> </div>
+    <div class="header"> <h2> To Do List </h2> </div>
     <div class="body">
         <form id = "input_form" action = todo_save.jsp method = post>
             <span>날짜입력</span>

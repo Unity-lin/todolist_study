@@ -10,6 +10,12 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%
+    if(session.getAttribute("user_seq") == null){
+
+        response.sendRedirect("login_form.jsp");
+    }
+%>
+<%
     String input_date = request.getParameter("input_date");
     String work_list = request.getParameter("work_list");
     String sT = request.getParameter("start-time");
@@ -45,8 +51,10 @@
     conn = DriverManager.getConnection(url, id, pwd);
 
     String sql =
-            "insert into todo (input_date, work_name, start_date, finish_date, reception_way, isbibration)\n" +
-                    "values (now(), ?, ?, ?, ?, ?)";
+            "insert into todo (input_date, work_name, start_date, finish_date, reception_way, isbibration, user_seq)\n" +
+                    "values (now(), ?, ?, ?, ?, ?, ?)";
+
+    int user_seq = (Integer) session.getAttribute("user_seq");
 
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, work_list);
@@ -54,6 +62,8 @@
     pstmt.setTimestamp(3, Timestamp.valueOf(finishTimeResult));
     pstmt.setString(4, msg_sns);
     pstmt.setString(5, bibration);
+    pstmt.setInt(6, user_seq);
+
 
     pstmt.executeUpdate();
 
